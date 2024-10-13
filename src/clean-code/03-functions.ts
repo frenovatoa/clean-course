@@ -1,28 +1,28 @@
 (() => {
 
     //// Función para obtener información de una película por id.
-    function getMovieById( id: string ) {
+    function getMovieById(id: string) {
         console.log({ id });
     }
 
     //// Función para obtener información de los actores de una película.
-    function getMovieCastById( id: string ) {
+    function getMovieCastById(id: string) {
         console.log({ id });
     }
 
     //// Función para obtener el bio del actor por el id.
-    function getActorBioById( id: string ) {
+    function getActorBioById(id: string) {
         console.log({ id });
     }
-    
+
     //// Crear una película.
     //! Es recoemndable usar máximo 3 parámetros.
 
     interface Movie {
-        cast:           string[];
-        description:    string;
-        rating:         number;
-        title:          string;
+        cast: string[];
+        description: string;
+        rating: number;
+        title: string;
     }
 
     function createMovie({ title, description, rating, cast }: Movie) {
@@ -31,17 +31,38 @@
 
     //// Crea un nuevo actor.
 
-    function checkFullName( fullName: string ) {
+    function checkFullName(fullName: string) {
         console.log({ fullName });
         return true;
     }
 
-    function createActor( fullName: string, birthdate: Date ): boolean {
-        
-        if ( !checkFullName(fullName) ) return false;
+    function createActor(fullName: string, birthdate: Date): boolean {
+
+        if (!checkFullName(fullName)) return false;
 
         console.log('Crear actor...');
-        return true;        
+        return true;
+    }
+
+    //* Continuación...
+
+    const getPayAmount = ({ isDead = false, isSeparated = true, isRetired = false }) => {
+        let result;
+        if (isDead) {
+            result = 1500;
+        } else {
+            if (isSeparated) {
+                result = 2500;
+            } else {
+                if (isRetired) {
+                    result = 3000;
+                } else {
+                    result = 4000;
+                }
+            }
+        }
+
+        return result;
     }
 
 })();
