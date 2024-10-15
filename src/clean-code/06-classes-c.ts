@@ -1,6 +1,7 @@
 (() => {
 
-    //! Todavía sin aplicar el principio de responsabilidad única (objetos como propiedades).
+    //! Aplicando el principio de responsabilidad única.
+    //! Priorizar la composición sobre la herencia.
 
     type Gender = 'M' | 'F';
 
@@ -24,21 +25,17 @@
     }
 
     interface UserProps {
-        birthdate: Date;
         email: string;
-        gender: Gender;
-        name: string;
         role: string;
     }
 
-    class User extends Person {
+    class User {
 
         public email: string;
         public lastAccess: Date;
         public role: string;
 
-        constructor({ birthdate, email, gender, name, role }: UserProps) {
-            super({ name, gender, birthdate });
+        constructor({ email, role }: UserProps) {
             this.lastAccess = new Date();
             this.email = email;
             this.role = role;
@@ -46,6 +43,25 @@
 
         checkCredentials() {
             return true;
+        }
+    }
+
+    interface SettingsProps {
+        lastOpenedFolder: string;
+        workingDirectory: string;
+    }
+
+    class Settings {
+
+        public workingDirectory: string;
+        public lastOpenedFolder: string;
+
+        constructor({
+            lastOpenedFolder,
+            workingDirectory,
+        }: SettingsProps) {
+            this.workingDirectory = workingDirectory;
+            this.lastOpenedFolder = lastOpenedFolder;
         }
     }
 
@@ -59,23 +75,19 @@
         workingDirectory: string;
     }
 
-    class UserSettings extends User {
-
-        public workingDirectory: string;
-        public lastOpenedFolder: string;
+    class UserSettings {
+        public person: Person;
+        public user: User;
+        public settings: Settings;
 
         constructor({
-            workingDirectory,
-            lastOpenedFolder,
-            email,
-            role,
-            name,
-            gender,
-            birthdate
+            name, gender, birthdate,
+            email, role,
+            lastOpenedFolder, workingDirectory,
         }: UserSettingsProps) {
-            super({ email, role, name, gender, birthdate });
-            this.workingDirectory = workingDirectory;
-            this.lastOpenedFolder = lastOpenedFolder;
+            this.person = new Person({ name, gender, birthdate });
+            this.user = new User({ email, role });
+            this.settings = new Settings({ lastOpenedFolder, workingDirectory });
         }
     }
 
