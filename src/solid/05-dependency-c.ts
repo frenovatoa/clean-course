@@ -1,10 +1,15 @@
 import localPosts from '../data/local-database.json';
+import { Post } from './05-dependency-b';
 
-export class LocalDataBaseService {
+export abstract class PostProvider {
+    abstract getPosts(): Promise<Post[]>;
+}
+
+export class LocalDataBaseService implements PostProvider {
 
     constructor() {}
 
-    async getFakePosts() {
+    async getPosts() {
         return [
             {
                 'userId': 1,
@@ -22,8 +27,8 @@ export class LocalDataBaseService {
 
 }
 
-export class JsonDatabaseService {
-    async getPots() {
+export class JsonDatabaseService implements PostProvider {
+    async getPosts() {
         return localPosts;
     }
 }

@@ -5,8 +5,8 @@ import { JsonDatabaseService, LocalDataBaseService } from './05-dependency-c';
 // Main
 (async () => {
 
-    // const provider = new JsonDatabaseService();
-    const provider = new LocalDataBaseService();
+    const provider = new JsonDatabaseService();
+    // const provider = new LocalDataBaseService();
 
     const postService = new PostService(provider);
 
