@@ -32,3 +32,14 @@ export class JsonDatabaseService implements PostProvider {
         return localPosts;
     }
 }
+
+// TODO: Nuevo Proveedor de Posts.
+// TODO: Implementar un llamado a una API.
+
+export class WebApiPostService implements PostProvider {
+    async getPosts(): Promise<Post[]> {
+
+        const resp = await fetch('https://jsonplaceholder.typicode.com/posts');
+        return await resp.json();
+    }
+}
